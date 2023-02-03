@@ -1,16 +1,16 @@
 let x, y, diameter
-let gravity = 1
-let friction = .97   
+let friction = .8
 let velocity = 0
-let updrift = 25
+let moveSpeed = 2
 let rectX, rectY, rectW, rectH
 let rectSpeed = 10
 let score = 0
-let bird1,bird2,bird3,bird4,bird5
+let bird1,bird2,bird3,bird4,bird5, car
 const animRate = 50
 
 
 function preload() {
+    car = loadImage('assets/car.png')
     bird1 = loadImage('assets/bird1.png');
     bird2 = loadImage('assets/bird2.png');
     bird3 = loadImage('assets/bird3.png');
@@ -54,28 +54,37 @@ function show(){
     stroke(0,0,0,0)
     ellipse(x, y, diameter)*/  
     
-    let a = frameCount % animRate/10
-    if(a<1)image(bird1, x, y)
-    if(a>=1&&a<2)image(bird2, x, y)
-    if(a>=2&&a<3)image(bird3, x, y)
-    if(a>=3&&a<4)image(bird4, x, y)
-    if(a>=4)image(bird5, x, y)
+    // let a = frameCount % animRate/10
+    // if(a<1)image(bird1, x, y)
+    // if(a>=1&&a<2)image(bird2, x, y)
+    // if(a>=2&&a<3)image(bird3, x, y)
+    // if(a>=3&&a<4)image(bird4, x, y)
+    // if(a>=4)image(bird5, x, y)
+    image(car, x, y)
 }
 
 function update(){
-    velocity += gravity
+    // velocity += gravity
     velocity *= friction
     y += velocity 
 
     if(y > windowHeight - diameter/2){
         y = windowHeight - diameter/2
-        velocity = -velocity
+        velocity = 0
     }
     if(y < 0 + diameter/2){
         y = 0 + diameter/2
         score +=4
-        velocity = -velocity
+        velocity = 0
     }
+
+    if(keyIsDown(UP_ARROW)){
+        velocity = velocity - moveSpeed
+    }
+    if(keyIsDown(DOWN_ARROW)){
+        velocity = velocity + moveSpeed
+    }
+    
 }
 
 function colision(){
@@ -101,10 +110,14 @@ function draw(){
     updateRect()
     select('#info').html(score)
     colision()
+
+  
 }
 
-function keyPressed(key){
-    if(key.key == ' '){
-        velocity -= updrift
-    }
-}
+// function keyPressed(key){
+//     if(key.key == ' '){
+//         velocity -= updrift
+//     }
+// }
+
+
