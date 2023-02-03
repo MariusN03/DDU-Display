@@ -25,24 +25,24 @@ function setup(){
     x = windowWidth/2
     diameter = 110
     y = 200
-    rectW = 20
-    rectH = 100
-    rectX = windowWidth
-    rectY = windowHeight - rectH
+    rectW = 50
+    rectH = 20
+    rectX = windowWidth - rectW
+    rectY = windowHeight
 }
 
 function showRect(){
     stroke('black')
     fill('white')
     rect(rectX, rectY, rectW, rectH)
-    rect(rectX, 0, rectW, rectH)
+    rect(0, rectY, rectW, rectH)
 }
 
 function updateRect(){
-    rectX -= rectSpeed 
+    rectY += rectSpeed 
     if(rectX <= 0){
-        rectX = windowWidth
-        rectH = random(100, 300)
+        rectX = windowWidth - rectW
+        rectW = random(100, 300)
         rectY = windowHeight - rectH  
     }
 }
@@ -54,13 +54,13 @@ function show(){
     stroke(0,0,0,0)
     ellipse(x, y, diameter)*/  
     
-    // let a = frameCount % animRate/10
-    // if(a<1)image(bird1, x, y)
-    // if(a>=1&&a<2)image(bird2, x, y)
-    // if(a>=2&&a<3)image(bird3, x, y)
-    // if(a>=3&&a<4)image(bird4, x, y)
-    // if(a>=4)image(bird5, x, y)
-    image(car, x, y)
+    let a = frameCount % animRate/10
+    if(a<1)image(bird1, x, y)
+    if(a>=1&&a<2)image(bird2, x, y)
+    if(a>=2&&a<3)image(bird3, x, y)
+    if(a>=3&&a<4)image(bird4, x, y)
+    if(a>=4)image(bird5, x, y)
+    // image(car, x, y)
 }
 
 function update(){
